@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "state_volume": "workspace.beverage_sales_bronze.ingestion_state",
+  "name": "channels",
+  "source_path": "/Volumes/workspace/beverage_sales_landing/source_files",
+  "file_pattern": "abi_bus_case1_beverage_channel_group_*.csv",
+  "format": "csv",
+  "target": "workspace.beverage_sales_bronze.channel_group",
+  "reader_options": {
+    "encoding": "UTF-8",
+    "sep": ",",
+    "multiLine": false
+  },
+  "columns": [
+    {
+      "source": "TRADE_CHNL_DESC",
+      "target": "trade_channel_description",
+      "description": "Type of sales outlet or establishment, such as SUPERMARKET, RESTAURANT or CONVENIENCE STORE."
+    },
+    {
+      "source": "TRADE_GROUP_DESC",
+      "target": "trade_group_description",
+      "description": "Business activity category used to group sales channels, such as GROCERY, SERVICES or ENTERTAINMENT."
+    },
+    {
+      "source": "TRADE_TYPE_DESC",
+      "target": "trade_type_description",
+      "description": "Classification of the sales channel by beverage type: ALCOHOLIC, NON ALCOHOLIC or MIX."
+    }
+  ],
+  "reference_counts": {
+    "abi_bus_case1_beverage_channel_group_20210726.csv": 31
+  },
+  "description": "Source classifications of sales channels by trade group and beverage type.",
+  "quality": {
+    "bronze_no_rescued_data": {
+      "type": "null",
+      "columns": [
+        "_rescued_data"
+      ],
+      "description": "Checks that no source fields were rescued during file parsing."
+    },
+    "bronze_source_path_present": {
+      "type": "required",
+      "columns": [
+        "_source_file_path"
+      ],
+      "description": "Checks that _source_file_path is populated."
+    }
+  }
+}

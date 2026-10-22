@@ -1,0 +1,63 @@
+{
+  "name": "agg_sales_region_trade_group",
+  "target": "workspace.beverage_sales_gold.agg_sales_region_trade_group",
+  "description": "Total monetary sales by region and commercial trade group.",
+  "columns": [
+    {
+      "name": "region_name",
+      "type": "string",
+      "description": "Geographic sales region."
+    },
+    {
+      "name": "trade_group_description",
+      "type": "string",
+      "description": "Business activity category used to group sales channels."
+    },
+    {
+      "name": "sales_amount",
+      "type": "decimal(38,2)",
+      "description": "Monetary sales amount, including negative and zero values; currency is unspecified."
+    }
+  ],
+  "kind": "summary",
+  "depends_on": [
+    "fact_sales",
+    "dim_region",
+    "dim_channel"
+  ],
+  "source_name": "fact_sales",
+  "quality": {
+    "aggregate_group_key_valid": {
+      "type": "unique",
+      "columns": [
+        "region_name",
+        "trade_group_description"
+      ],
+      "description": "Checks that region_name, trade_group_description form a complete, unique group key."
+    },
+    "aggregate_totals_match_fact": {
+      "type": "aggregate",
+      "source": "gold/fact_sales",
+      "joins": [
+        {
+          "table": "gold/dim_region",
+          "columns": [
+            "region_key"
+          ]
+        },
+        {
+          "table": "gold/dim_channel",
+          "columns": [
+            "channel_key"
+          ]
+        }
+      ],
+      "group_by": [
+        "region_name",
+        "trade_group_description"
+      ],
+      "measure": "sales_amount",
+      "description": "Checks that sales totals by region_name, trade_group_description match the sales fact."
+    }
+  }
+}

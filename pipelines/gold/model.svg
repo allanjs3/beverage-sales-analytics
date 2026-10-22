@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="940" viewBox="0 0 1600 940" role="img" aria-labelledby="title description">
+<title id="title">Beverage sales dimensional model</title>
+<desc id="description">Star schema: sales fact linked to calendar, product, region and channel. Each dimension member can have zero or many sales.</desc>
+<rect width="1600" height="940" fill="#F5F7FA"/>
+<style>text{font-family:Segoe UI,Arial,sans-serif}.field{font-family:Consolas,monospace;font-size:16px;fill:#213547}.type{font-family:Consolas,monospace;font-size:14px;fill:#586B7B}.key{font-size:12px;font-weight:700;fill:#17607D}</style>
+<text x="40" y="58" font-size="32" font-weight="700" fill="#172D40">Sales dimensional model</text>
+<text x="40" y="94" font-size="19" fill="#586B7B">workspace.beverage_sales_gold</text>
+<polyline points="480,243 520,243 520,353 570,353" fill="none" stroke="#247C9E" stroke-width="3" stroke-linejoin="round"/>
+<text x="492" y="231" font-size="16" font-weight="700" fill="#17607D">1</text>
+<text x="544" y="341" font-size="16" font-weight="700" fill="#17607D">N</text>
+<polyline points="480,603 500,603 500,387 570,387" fill="none" stroke="#247C9E" stroke-width="3" stroke-linejoin="round"/>
+<text x="492" y="591" font-size="16" font-weight="700" fill="#17607D">1</text>
+<text x="544" y="375" font-size="16" font-weight="700" fill="#17607D">N</text>
+<polyline points="1120,243 1080,243 1080,421 1030,421" fill="none" stroke="#247C9E" stroke-width="3" stroke-linejoin="round"/>
+<text x="1098" y="231" font-size="16" font-weight="700" fill="#17607D">1</text>
+<text x="1039" y="409" font-size="16" font-weight="700" fill="#17607D">N</text>
+<polyline points="1120,563 1100,563 1100,455 1030,455" fill="none" stroke="#247C9E" stroke-width="3" stroke-linejoin="round"/>
+<text x="1098" y="551" font-size="16" font-weight="700" fill="#17607D">1</text>
+<text x="1039" y="443" font-size="16" font-weight="700" fill="#17607D">N</text>
+<rect x="40" y="174" width="440" height="276" rx="9" fill="#DCE3EA"/>
+<rect x="40" y="170" width="440" height="276" rx="9" fill="white" stroke="#C7D2DE"/>
+<path d="M49,170 H471 Q480,170 480,179 V226 H40 V179 Q40,170 49,170 Z" fill="#164E63"/>
+<text x="60" y="205" font-size="24" font-weight="700" fill="white">dim_calendar</text>
+<rect x="41" y="226" width="438" height="34" fill="#EFF7FA"/>
+<text x="56" y="248" class="key">PK</text>
+<text x="93" y="248" class="field">date_key</text>
+<text x="464" y="248" class="type" text-anchor="end">int</text>
+<line x1="56" y1="260" x2="464" y2="260" stroke="#E7EDF2"/>
+<text x="93" y="282" class="field">calendar_date</text>
+<text x="464" y="282" class="type" text-anchor="end">date</text>
+<line x1="56" y1="294" x2="464" y2="294" stroke="#E7EDF2"/>
+<text x="93" y="316" class="field">year</text>
+<text x="464" y="316" class="type" text-anchor="end">int</text>
+<line x1="56" y1="328" x2="464" y2="328" stroke="#E7EDF2"/>
+<text x="93" y="350" class="field">quarter</text>
+<text x="464" y="350" class="type" text-anchor="end">int</text>
+<line x1="56" y1="362" x2="464" y2="362" stroke="#E7EDF2"/>
+<text x="93" y="384" class="field">month</text>
+<text x="464" y="384" class="type" text-anchor="end">int</text>
+<line x1="56" y1="396" x2="464" y2="396" stroke="#E7EDF2"/>
+<text x="93" y="418" class="field">day_of_month</text>
+<text x="464" y="418" class="type" text-anchor="end">int</text>
+<rect x="40" y="534" width="440" height="276" rx="9" fill="#DCE3EA"/>
+<rect x="40" y="530" width="440" height="276" rx="9" fill="white" stroke="#C7D2DE"/>
+<path d="M49,530 H471 Q480,530 480,539 V586 H40 V539 Q40,530 49,530 Z" fill="#164E63"/>
+<text x="60" y="565" font-size="24" font-weight="700" fill="white">dim_product</text>
+<rect x="41" y="586" width="438" height="34" fill="#EFF7FA"/>
+<text x="56" y="608" class="key">PK</text>
+<text x="93" y="608" class="field">product_key</text>
+<text x="464" y="608" class="type" text-anchor="end">string</text>
+<line x1="56" y1="620" x2="464" y2="620" stroke="#E7EDF2"/>
+<text x="93" y="642" class="field">brand_flavor_code</text>
+<text x="464" y="642" class="type" text-anchor="end">string</text>
+<line x1="56" y1="654" x2="464" y2="654" stroke="#E7EDF2"/>
+<text x="93" y="676" class="field">brand_name</text>
+<text x="464" y="676" class="type" text-anchor="end">string</text>
+<line x1="56" y1="688" x2="464" y2="688" stroke="#E7EDF2"/>
+<text x="93" y="710" class="field">package_category_code</text>
+<text x="464" y="710" class="type" text-anchor="end">string</text>
+<line x1="56" y1="722" x2="464" y2="722" stroke="#E7EDF2"/>
+<text x="93" y="744" class="field">package_category_description</text>
+<text x="464" y="744" class="type" text-anchor="end">string</text>
+<line x1="56" y1="756" x2="464" y2="756" stroke="#E7EDF2"/>
+<text x="93" y="778" class="field">package_name</text>
+<text x="464" y="778" class="type" text-anchor="end">string</text>
+<rect x="1120" y="174" width="440" height="140" rx="9" fill="#DCE3EA"/>
+<rect x="1120" y="170" width="440" height="140" rx="9" fill="white" stroke="#C7D2DE"/>
+<path d="M1129,170 H1551 Q1560,170 1560,179 V226 H1120 V179 Q1120,170 1129,170 Z" fill="#164E63"/>
+<text x="1140" y="205" font-size="24" font-weight="700" fill="white">dim_region</text>
+<rect x="1121" y="226" width="438" height="34" fill="#EFF7FA"/>
+<text x="1136" y="248" class="key">PK</text>
+<text x="1173" y="248" class="field">region_key</text>
+<text x="1544" y="248" class="type" text-anchor="end">string</text>
+<line x1="1136" y1="260" x2="1544" y2="260" stroke="#E7EDF2"/>
+<text x="1173" y="282" class="field">region_name</text>
+<text x="1544" y="282" class="type" text-anchor="end">string</text>
+<rect x="1120" y="494" width="440" height="242" rx="9" fill="#DCE3EA"/>
+<rect x="1120" y="490" width="440" height="242" rx="9" fill="white" stroke="#C7D2DE"/>
+<path d="M1129,490 H1551 Q1560,490 1560,499 V546 H1120 V499 Q1120,490 1129,490 Z" fill="#164E63"/>
+<text x="1140" y="525" font-size="24" font-weight="700" fill="white">dim_channel</text>
+<rect x="1121" y="546" width="438" height="34" fill="#EFF7FA"/>
+<text x="1136" y="568" class="key">PK</text>
+<text x="1173" y="568" class="field">channel_key</text>
+<text x="1544" y="568" class="type" text-anchor="end">string</text>
+<line x1="1136" y1="580" x2="1544" y2="580" stroke="#E7EDF2"/>
+<text x="1173" y="602" class="field">trade_channel_key</text>
+<text x="1544" y="602" class="type" text-anchor="end">string</text>
+<line x1="1136" y1="614" x2="1544" y2="614" stroke="#E7EDF2"/>
+<text x="1173" y="636" class="field">trade_channel_description</text>
+<text x="1544" y="636" class="type" text-anchor="end">string</text>
+<line x1="1136" y1="648" x2="1544" y2="648" stroke="#E7EDF2"/>
+<text x="1173" y="670" class="field">trade_group_description</text>
+<text x="1544" y="670" class="type" text-anchor="end">string</text>
+<line x1="1136" y1="682" x2="1544" y2="682" stroke="#E7EDF2"/>
+<text x="1173" y="704" class="field">trade_type_description</text>
+<text x="1544" y="704" class="type" text-anchor="end">string</text>
+<rect x="570" y="284" width="460" height="378" rx="9" fill="#DCE3EA"/>
+<rect x="570" y="280" width="460" height="378" rx="9" fill="white" stroke="#C7D2DE"/>
+<path d="M579,280 H1021 Q1030,280 1030,289 V336 H570 V289 Q570,280 579,280 Z" fill="#845B16"/>
+<text x="590" y="315" font-size="24" font-weight="700" fill="white">fact_sales</text>
+<rect x="571" y="336" width="458" height="34" fill="#EFF7FA"/>
+<text x="586" y="358" class="key">FK</text>
+<text x="623" y="358" class="field">date_key</text>
+<text x="1014" y="358" class="type" text-anchor="end">int</text>
+<rect x="571" y="370" width="458" height="34" fill="#EFF7FA"/>
+<line x1="586" y1="370" x2="1014" y2="370" stroke="#E7EDF2"/>
+<text x="586" y="392" class="key">FK</text>
+<text x="623" y="392" class="field">product_key</text>
+<text x="1014" y="392" class="type" text-anchor="end">string</text>
+<rect x="571" y="404" width="458" height="34" fill="#EFF7FA"/>
+<line x1="586" y1="404" x2="1014" y2="404" stroke="#E7EDF2"/>
+<text x="586" y="426" class="key">FK</text>
+<text x="623" y="426" class="field">region_key</text>
+<text x="1014" y="426" class="type" text-anchor="end">string</text>
+<rect x="571" y="438" width="458" height="34" fill="#EFF7FA"/>
+<line x1="586" y1="438" x2="1014" y2="438" stroke="#E7EDF2"/>
+<text x="586" y="460" class="key">FK</text>
+<text x="623" y="460" class="field">channel_key</text>
+<text x="1014" y="460" class="type" text-anchor="end">string</text>
+<line x1="586" y1="472" x2="1014" y2="472" stroke="#E7EDF2"/>
+<text x="623" y="494" class="field">channel_group</text>
+<text x="1014" y="494" class="type" text-anchor="end">string</text>
+<line x1="586" y1="506" x2="1014" y2="506" stroke="#E7EDF2"/>
+<text x="623" y="528" class="field">period</text>
+<text x="1014" y="528" class="type" text-anchor="end">int</text>
+<rect x="571" y="540" width="458" height="34" fill="#FFF5DD"/>
+<line x1="586" y1="540" x2="1014" y2="540" stroke="#E7EDF2"/>
+<text x="623" y="562" class="field">sales_amount</text>
+<text x="1014" y="562" class="type" text-anchor="end">decimal(28,2)</text>
+<line x1="586" y1="574" x2="1014" y2="574" stroke="#E7EDF2"/>
+<text x="623" y="596" class="field">_source_file_path</text>
+<text x="1014" y="596" class="type" text-anchor="end">string</text>
+<line x1="586" y1="608" x2="1014" y2="608" stroke="#E7EDF2"/>
+<text x="623" y="630" class="field">_silver_run_id</text>
+<text x="1014" y="630" class="type" text-anchor="end">string</text>
+<rect x="570" y="700" width="460" height="98" rx="8" fill="#E8EEF4"/>
+<text x="590" y="729" font-size="17" font-weight="700" fill="#213547">Fact grain</text>
+<text x="590" y="755" font-size="17" fill="#213547">One row per sales occurrence</text>
+<text x="590" y="779" font-size="17" fill="#213547">received from Silver.</text>
+<text x="40" y="865" font-size="18" fill="#213547">1:N  A dimension member can be associated with zero or many sales.</text>
+<text x="40" y="898" font-size="17" fill="#586B7B">PK: dimension key  ·  FK: fact reference  ·  Logical relationships checked during processing.</text>
+</svg>

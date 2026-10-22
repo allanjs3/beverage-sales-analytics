@@ -1,0 +1,31 @@
+{
+  "name": "dim_region",
+  "target": "workspace.beverage_sales_gold.dim_region",
+  "description": "Geographic regions associated with beverage sales.",
+  "columns": [
+    {
+      "name": "region_key",
+      "type": "string",
+      "description": "Deterministic identifier of the sales region."
+    },
+    {
+      "name": "region_name",
+      "type": "string",
+      "description": "Geographic sales region."
+    }
+  ],
+  "kind": "dimension",
+  "depends_on": [],
+  "key": "region_key",
+  "source_table": "workspace.beverage_sales_silver.sales",
+  "state_volume": "workspace.beverage_sales_gold.processing_state",
+  "quality": {
+    "gold_dimension_key_valid": {
+      "type": "unique",
+      "columns": [
+        "region_key"
+      ],
+      "description": "Checks that region_key is populated and unique."
+    }
+  }
+}

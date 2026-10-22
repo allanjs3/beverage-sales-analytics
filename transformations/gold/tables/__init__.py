@@ -1,0 +1,1 @@
+"""Table-specific Gold projections."""

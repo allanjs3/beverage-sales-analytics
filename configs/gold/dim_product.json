@@ -1,0 +1,51 @@
+{
+  "name": "dim_product",
+  "target": "workspace.beverage_sales_gold.dim_product",
+  "description": "Beverage presentations identified by brand/flavor and packaging.",
+  "columns": [
+    {
+      "name": "product_key",
+      "type": "string",
+      "description": "Deterministic identifier of a beverage brand/flavor and packaging presentation."
+    },
+    {
+      "name": "brand_flavor_code",
+      "type": "string",
+      "description": "Code identifying the beverage brand/flavor."
+    },
+    {
+      "name": "brand_name",
+      "type": "string",
+      "description": "Name of the beverage brand."
+    },
+    {
+      "name": "package_category_code",
+      "type": "string",
+      "description": "Code identifying the packaging category."
+    },
+    {
+      "name": "package_category_description",
+      "type": "string",
+      "description": "Description of the packaging category."
+    },
+    {
+      "name": "package_name",
+      "type": "string",
+      "description": "Standardized name of the beverage packaging presentation."
+    }
+  ],
+  "kind": "dimension",
+  "depends_on": [],
+  "key": "product_key",
+  "source_table": "workspace.beverage_sales_silver.sales",
+  "state_volume": "workspace.beverage_sales_gold.processing_state",
+  "quality": {
+    "gold_dimension_key_valid": {
+      "type": "unique",
+      "columns": [
+        "product_key"
+      ],
+      "description": "Checks that product_key is populated and unique."
+    }
+  }
+}

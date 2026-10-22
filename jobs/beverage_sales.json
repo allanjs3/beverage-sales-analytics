@@ -1,0 +1,242 @@
+{
+  "name": "beverage_sales",
+  "description": "Incremental Bronze, Silver and Gold processing with essential data quality after successful loads.",
+  "max_concurrent_runs": 1,
+  "queue": {
+    "enabled": true
+  },
+  "tasks": [
+    {
+      "task_key": "bronze_channel_group",
+      "notebook_task": {
+        "notebook_path": "/Users/allanjs3@yahoo.com.br/beverage_sales/pipelines/bronze/01_ingest_bronze",
+        "base_parameters": {
+          "project_root": "/Workspace/Users/allanjs3@yahoo.com.br/beverage_sales",
+          "table_name": "channel_group"
+        }
+      }
+    },
+    {
+      "task_key": "bronze_sales",
+      "notebook_task": {
+        "notebook_path": "/Users/allanjs3@yahoo.com.br/beverage_sales/pipelines/bronze/01_ingest_bronze",
+        "base_parameters": {
+          "project_root": "/Workspace/Users/allanjs3@yahoo.com.br/beverage_sales",
+          "table_name": "sales"
+        }
+      }
+    },
+    {
+      "task_key": "silver_channel_group",
+      "notebook_task": {
+        "notebook_path": "/Users/allanjs3@yahoo.com.br/beverage_sales/pipelines/silver/01_process_silver",
+        "base_parameters": {
+          "project_root": "/Workspace/Users/allanjs3@yahoo.com.br/beverage_sales",
+          "table_name": "channel_group"
+        }
+      },
+      "depends_on": [
+        {
+          "task_key": "bronze_channel_group"
+        }
+      ]
+    },
+    {
+      "task_key": "silver_sales",
+      "notebook_task": {
+        "notebook_path": "/Users/allanjs3@yahoo.com.br/beverage_sales/pipelines/silver/01_process_silver",
+        "base_parameters": {
+          "project_root": "/Workspace/Users/allanjs3@yahoo.com.br/beverage_sales",
+          "table_name": "sales"
+        }
+      },
+      "depends_on": [
+        {
+          "task_key": "bronze_sales"
+        },
+        {
+          "task_key": "silver_channel_group"
+        }
+      ]
+    },
+    {
+      "task_key": "gold_dim_calendar",
+      "notebook_task": {
+        "notebook_path": "/Users/allanjs3@yahoo.com.br/beverage_sales/pipelines/gold/01_process_gold",
+        "base_parameters": {
+          "project_root": "/Workspace/Users/allanjs3@yahoo.com.br/beverage_sales",
+          "table_name": "dim_calendar"
+        }
+      },
+      "depends_on": [
+        {
+          "task_key": "silver_sales"
+        }
+      ]
+    },
+    {
+      "task_key": "gold_dim_channel",
+      "notebook_task": {
+        "notebook_path": "/Users/allanjs3@yahoo.com.br/beverage_sales/pipelines/gold/01_process_gold",
+        "base_parameters": {
+          "project_root": "/Workspace/Users/allanjs3@yahoo.com.br/beverage_sales",
+          "table_name": "dim_channel"
+        }
+      },
+      "depends_on": [
+        {
+          "task_key": "silver_channel_group"
+        }
+      ]
+    },
+    {
+      "task_key": "gold_dim_product",
+      "notebook_task": {
+        "notebook_path": "/Users/allanjs3@yahoo.com.br/beverage_sales/pipelines/gold/01_process_gold",
+        "base_parameters": {
+          "project_root": "/Workspace/Users/allanjs3@yahoo.com.br/beverage_sales",
+          "table_name": "dim_product"
+        }
+      },
+      "depends_on": [
+        {
+          "task_key": "silver_sales"
+        }
+      ]
+    },
+    {
+      "task_key": "gold_dim_region",
+      "notebook_task": {
+        "notebook_path": "/Users/allanjs3@yahoo.com.br/beverage_sales/pipelines/gold/01_process_gold",
+        "base_parameters": {
+          "project_root": "/Workspace/Users/allanjs3@yahoo.com.br/beverage_sales",
+          "table_name": "dim_region"
+        }
+      },
+      "depends_on": [
+        {
+          "task_key": "silver_sales"
+        }
+      ]
+    },
+    {
+      "task_key": "gold_fact_sales",
+      "notebook_task": {
+        "notebook_path": "/Users/allanjs3@yahoo.com.br/beverage_sales/pipelines/gold/01_process_gold",
+        "base_parameters": {
+          "project_root": "/Workspace/Users/allanjs3@yahoo.com.br/beverage_sales",
+          "table_name": "fact_sales"
+        }
+      },
+      "depends_on": [
+        {
+          "task_key": "gold_dim_calendar"
+        },
+        {
+          "task_key": "gold_dim_product"
+        },
+        {
+          "task_key": "gold_dim_region"
+        },
+        {
+          "task_key": "gold_dim_channel"
+        }
+      ]
+    },
+    {
+      "task_key": "gold_agg_sales_brand_month",
+      "notebook_task": {
+        "notebook_path": "/Users/allanjs3@yahoo.com.br/beverage_sales/pipelines/gold/01_process_gold",
+        "base_parameters": {
+          "project_root": "/Workspace/Users/allanjs3@yahoo.com.br/beverage_sales",
+          "table_name": "agg_sales_brand_month"
+        }
+      },
+      "depends_on": [
+        {
+          "task_key": "gold_fact_sales"
+        }
+      ]
+    },
+    {
+      "task_key": "gold_agg_sales_region_brand",
+      "notebook_task": {
+        "notebook_path": "/Users/allanjs3@yahoo.com.br/beverage_sales/pipelines/gold/01_process_gold",
+        "base_parameters": {
+          "project_root": "/Workspace/Users/allanjs3@yahoo.com.br/beverage_sales",
+          "table_name": "agg_sales_region_brand"
+        }
+      },
+      "depends_on": [
+        {
+          "task_key": "gold_fact_sales"
+        }
+      ]
+    },
+    {
+      "task_key": "gold_agg_sales_region_trade_group",
+      "notebook_task": {
+        "notebook_path": "/Users/allanjs3@yahoo.com.br/beverage_sales/pipelines/gold/01_process_gold",
+        "base_parameters": {
+          "project_root": "/Workspace/Users/allanjs3@yahoo.com.br/beverage_sales",
+          "table_name": "agg_sales_region_trade_group"
+        }
+      },
+      "depends_on": [
+        {
+          "task_key": "gold_fact_sales"
+        }
+      ]
+    },
+    {
+      "task_key": "data_quality",
+      "depends_on": [
+        {
+          "task_key": "bronze_channel_group"
+        },
+        {
+          "task_key": "bronze_sales"
+        },
+        {
+          "task_key": "silver_channel_group"
+        },
+        {
+          "task_key": "silver_sales"
+        },
+        {
+          "task_key": "gold_dim_calendar"
+        },
+        {
+          "task_key": "gold_dim_channel"
+        },
+        {
+          "task_key": "gold_dim_product"
+        },
+        {
+          "task_key": "gold_dim_region"
+        },
+        {
+          "task_key": "gold_fact_sales"
+        },
+        {
+          "task_key": "gold_agg_sales_brand_month"
+        },
+        {
+          "task_key": "gold_agg_sales_region_brand"
+        },
+        {
+          "task_key": "gold_agg_sales_region_trade_group"
+        }
+      ],
+      "notebook_task": {
+        "notebook_path": "/Users/allanjs3@yahoo.com.br/beverage_sales/data_quality/01_validate_tables",
+        "base_parameters": {
+          "project_root": "/Workspace/Users/allanjs3@yahoo.com.br/beverage_sales",
+          "execution_mode": "Automatic",
+          "upstream_results": "{\"bronze_channel_group\": {\"state\": \"{{tasks.bronze_channel_group.result_state}}\", \"changed\": \"{{tasks.bronze_channel_group.values.has_new_data}}\"}, \"bronze_sales\": {\"state\": \"{{tasks.bronze_sales.result_state}}\", \"changed\": \"{{tasks.bronze_sales.values.has_new_data}}\"}, \"silver_channel_group\": {\"state\": \"{{tasks.silver_channel_group.result_state}}\", \"changed\": \"{{tasks.silver_channel_group.values.has_new_data}}\"}, \"silver_sales\": {\"state\": \"{{tasks.silver_sales.result_state}}\", \"changed\": \"{{tasks.silver_sales.values.has_new_data}}\"}, \"gold_dim_calendar\": {\"state\": \"{{tasks.gold_dim_calendar.result_state}}\", \"changed\": \"{{tasks.gold_dim_calendar.values.has_new_data}}\"}, \"gold_dim_channel\": {\"state\": \"{{tasks.gold_dim_channel.result_state}}\", \"changed\": \"{{tasks.gold_dim_channel.values.has_new_data}}\"}, \"gold_dim_product\": {\"state\": \"{{tasks.gold_dim_product.result_state}}\", \"changed\": \"{{tasks.gold_dim_product.values.has_new_data}}\"}, \"gold_dim_region\": {\"state\": \"{{tasks.gold_dim_region.result_state}}\", \"changed\": \"{{tasks.gold_dim_region.values.has_new_data}}\"}, \"gold_fact_sales\": {\"state\": \"{{tasks.gold_fact_sales.result_state}}\", \"changed\": \"{{tasks.gold_fact_sales.values.has_new_data}}\"}, \"gold_agg_sales_brand_month\": {\"state\": \"{{tasks.gold_agg_sales_brand_month.result_state}}\", \"changed\": \"{{tasks.gold_agg_sales_brand_month.values.has_new_data}}\"}, \"gold_agg_sales_region_brand\": {\"state\": \"{{tasks.gold_agg_sales_region_brand.result_state}}\", \"changed\": \"{{tasks.gold_agg_sales_region_brand.values.has_new_data}}\"}, \"gold_agg_sales_region_trade_group\": {\"state\": \"{{tasks.gold_agg_sales_region_trade_group.result_state}}\", \"changed\": \"{{tasks.gold_agg_sales_region_trade_group.values.has_new_data}}\"}}",
+          "run_id": "{{job.run_id}}"
+        }
+      }
+    }
+  ]
+}

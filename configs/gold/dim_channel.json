@@ -1,0 +1,46 @@
+{
+  "name": "dim_channel",
+  "target": "workspace.beverage_sales_gold.dim_channel",
+  "description": "Sales channels with their commercial group and beverage type classifications.",
+  "columns": [
+    {
+      "name": "channel_key",
+      "type": "string",
+      "description": "Deterministic identifier of the classified sales channel."
+    },
+    {
+      "name": "trade_channel_key",
+      "type": "string",
+      "description": "Normalized business identifier of the sales channel."
+    },
+    {
+      "name": "trade_channel_description",
+      "type": "string",
+      "description": "Type of sales outlet or establishment."
+    },
+    {
+      "name": "trade_group_description",
+      "type": "string",
+      "description": "Business activity category used to group sales channels."
+    },
+    {
+      "name": "trade_type_description",
+      "type": "string",
+      "description": "Classification of the channel by beverage type."
+    }
+  ],
+  "kind": "dimension",
+  "depends_on": [],
+  "key": "channel_key",
+  "source_table": "workspace.beverage_sales_silver.channel_group",
+  "state_volume": "workspace.beverage_sales_gold.processing_state",
+  "quality": {
+    "gold_dimension_key_valid": {
+      "type": "unique",
+      "columns": [
+        "channel_key"
+      ],
+      "description": "Checks that channel_key is populated and unique."
+    }
+  }
+}

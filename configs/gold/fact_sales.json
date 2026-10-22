@@ -1,0 +1,93 @@
+{
+  "name": "fact_sales",
+  "target": "workspace.beverage_sales_gold.fact_sales",
+  "description": "Beverage sales at the source reporting grain: one row per received sales occurrence.",
+  "columns": [
+    {
+      "name": "date_key",
+      "type": "int",
+      "description": "Calendar date identifier in YYYYMMDD format."
+    },
+    {
+      "name": "product_key",
+      "type": "string",
+      "description": "Deterministic identifier of a beverage brand/flavor and packaging presentation."
+    },
+    {
+      "name": "region_key",
+      "type": "string",
+      "description": "Deterministic identifier of the sales region."
+    },
+    {
+      "name": "channel_key",
+      "type": "string",
+      "description": "Deterministic identifier of the classified sales channel."
+    },
+    {
+      "name": "channel_group",
+      "type": "string",
+      "description": "Sales reporting channel grouping, distinct from the trade group classification."
+    },
+    {
+      "name": "period",
+      "type": "int",
+      "description": "Reporting period identifier supplied with the sales record."
+    },
+    {
+      "name": "sales_amount",
+      "type": "decimal(28,2)",
+      "description": "Monetary sales amount, including negative and zero values; currency is unspecified."
+    },
+    {
+      "name": "_source_file_path",
+      "type": "string",
+      "description": "Path of the original file containing the sales record."
+    },
+    {
+      "name": "_silver_run_id",
+      "type": "string",
+      "description": "Silver execution identifier associated with the sales record."
+    }
+  ],
+  "source_table": "workspace.beverage_sales_silver.sales",
+  "state_volume": "workspace.beverage_sales_gold.processing_state",
+  "kind": "fact",
+  "depends_on": [
+    "dim_calendar",
+    "dim_product",
+    "dim_region",
+    "dim_channel"
+  ],
+  "quality": {
+    "gold_fact_references_exist": {
+      "type": "references",
+      "references": [
+        {
+          "table": "gold/dim_calendar",
+          "columns": [
+            "date_key"
+          ]
+        },
+        {
+          "table": "gold/dim_product",
+          "columns": [
+            "product_key"
+          ]
+        },
+        {
+          "table": "gold/dim_region",
+          "columns": [
+            "region_key"
+          ]
+        },
+        {
+          "table": "gold/dim_channel",
+          "columns": [
+            "channel_key"
+          ]
+        }
+      ],
+      "description": "Checks that every sale references existing calendar, product, region and channel dimension members."
+    }
+  }
+}

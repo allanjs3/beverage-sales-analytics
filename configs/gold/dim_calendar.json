@@ -1,0 +1,51 @@
+{
+  "name": "dim_calendar",
+  "target": "workspace.beverage_sales_gold.dim_calendar",
+  "description": "Daily calendar covering complete years observed in sales.",
+  "columns": [
+    {
+      "name": "date_key",
+      "type": "int",
+      "description": "Calendar date identifier in YYYYMMDD format."
+    },
+    {
+      "name": "calendar_date",
+      "type": "date",
+      "description": "Calendar day, including days without reported sales."
+    },
+    {
+      "name": "year",
+      "type": "int",
+      "description": "Calendar year."
+    },
+    {
+      "name": "quarter",
+      "type": "int",
+      "description": "Calendar quarter number from 1 to 4."
+    },
+    {
+      "name": "month",
+      "type": "int",
+      "description": "Calendar month number from 1 to 12."
+    },
+    {
+      "name": "day_of_month",
+      "type": "int",
+      "description": "Day number within the calendar month."
+    }
+  ],
+  "kind": "dimension",
+  "depends_on": [],
+  "key": "date_key",
+  "source_table": "workspace.beverage_sales_silver.sales",
+  "state_volume": "workspace.beverage_sales_gold.processing_state",
+  "quality": {
+    "gold_dimension_key_valid": {
+      "type": "unique",
+      "columns": [
+        "date_key"
+      ],
+      "description": "Checks that date_key is populated and unique."
+    }
+  }
+}

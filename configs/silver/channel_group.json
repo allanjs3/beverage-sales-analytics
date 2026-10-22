@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "name": "channel_group",
+  "source_table": "workspace.beverage_sales_bronze.channel_group",
+  "target": "workspace.beverage_sales_silver.channel_group",
+  "state_volume": "workspace.beverage_sales_silver.processing_state",
+  "validation_table": "workspace.beverage_sales_control.silver_channel_group_keys",
+  "description": "Standardized sales channels with trade group and beverage type classifications.",
+  "columns": [
+    {
+      "target": "trade_channel_description",
+      "description": "Type of sales outlet or establishment, such as SUPERMARKET, RESTAURANT or CONVENIENCE STORE."
+    },
+    {
+      "target": "trade_group_description",
+      "description": "Business activity category used to group sales channels, such as GROCERY, SERVICES or ENTERTAINMENT."
+    },
+    {
+      "target": "trade_type_description",
+      "description": "Classification of the sales channel by beverage type: ALCOHOLIC, NON ALCOHOLIC or MIX."
+    },
+    {
+      "target": "trade_channel_key",
+      "description": "Normalized sales channel identifier used to relate sales to channel classifications."
+    }
+  ],
+  "quality": {
+    "silver_required_fields": {
+      "type": "required",
+      "columns": [
+        "trade_channel_key",
+        "trade_group_description",
+        "trade_type_description"
+      ],
+      "description": "Checks that trade_channel_key, trade_group_description, trade_type_description are populated."
+    }
+  },
+  "validation_description": "Approved channel keys and classifications used to check incoming Silver channels."
+}

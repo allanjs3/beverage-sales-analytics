@@ -1,0 +1,70 @@
+{
+  "name": "agg_sales_brand_month",
+  "target": "workspace.beverage_sales_gold.agg_sales_brand_month",
+  "description": "Total monetary sales by beverage brand, calendar year and month.",
+  "columns": [
+    {
+      "name": "brand_name",
+      "type": "string",
+      "description": "Name of the beverage brand."
+    },
+    {
+      "name": "year",
+      "type": "int",
+      "description": "Calendar year."
+    },
+    {
+      "name": "month",
+      "type": "int",
+      "description": "Calendar month number from 1 to 12."
+    },
+    {
+      "name": "sales_amount",
+      "type": "decimal(38,2)",
+      "description": "Monetary sales amount, including negative and zero values; currency is unspecified."
+    }
+  ],
+  "kind": "summary",
+  "depends_on": [
+    "fact_sales",
+    "dim_product",
+    "dim_calendar"
+  ],
+  "source_name": "fact_sales",
+  "quality": {
+    "aggregate_group_key_valid": {
+      "type": "unique",
+      "columns": [
+        "brand_name",
+        "year",
+        "month"
+      ],
+      "description": "Checks that brand_name, year, month form a complete, unique group key."
+    },
+    "aggregate_totals_match_fact": {
+      "type": "aggregate",
+      "source": "gold/fact_sales",
+      "joins": [
+        {
+          "table": "gold/dim_product",
+          "columns": [
+            "product_key"
+          ]
+        },
+        {
+          "table": "gold/dim_calendar",
+          "columns": [
+            "date_key"
+          ]
+        }
+      ],
+      "group_by": [
+        "brand_name",
+        "year",
+        "month"
+      ],
+      "measure": "sales_amount",
+      "description": "Checks that sales totals by brand_name, year, month match the sales fact."
+    }
+  }
+}

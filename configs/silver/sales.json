@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "name": "sales",
+  "source_table": "workspace.beverage_sales_bronze.sales",
+  "target": "workspace.beverage_sales_silver.sales",
+  "state_volume": "workspace.beverage_sales_silver.processing_state",
+  "validation_table": "workspace.beverage_sales_control.silver_sales_keys",
+  "description": "Beverage sales with standardized fields, dates and monetary amounts.",
+  "columns": [
+    {
+      "target": "sale_date",
+      "description": "Date associated with the sales record."
+    },
+    {
+      "target": "brand_flavor_code",
+      "description": "Code identifying the beverage brand/flavor."
+    },
+    {
+      "target": "brand_name",
+      "description": "Name of the beverage brand."
+    },
+    {
+      "target": "region_name",
+      "description": "Geographic sales region."
+    },
+    {
+      "target": "channel_group",
+      "description": "Sales channel grouping used in sales reporting, such as FOOD SERVICE, SUPERS or CONVENIENCE RETAIL."
+    },
+    {
+      "target": "trade_channel_description",
+      "description": "Type of sales outlet or establishment, such as SUPERMARKET, RESTAURANT or CONVENIENCE STORE."
+    },
+    {
+      "target": "package_category_code",
+      "description": "Code identifying the packaging category."
+    },
+    {
+      "target": "package_category_description",
+      "description": "Packaging category description, such as 500ML 6P or 20Z/600ML."
+    },
+    {
+      "target": "package_name",
+      "description": "Standardized name of the beverage packaging presentation."
+    },
+    {
+      "target": "sales_amount",
+      "description": "Monetary value of beverage sales."
+    },
+    {
+      "target": "year",
+      "description": "Calendar year associated with the sales date."
+    },
+    {
+      "target": "month",
+      "description": "Calendar month associated with the sales date."
+    },
+    {
+      "target": "period",
+      "description": "Reporting period identifier associated with the sales record."
+    },
+    {
+      "target": "trade_channel_key",
+      "description": "Normalized sales channel identifier used to relate sales to channel classifications."
+    }
+  ],
+  "quality": {
+    "silver_required_fields": {
+      "type": "required",
+      "columns": [
+        "sale_date",
+        "sales_amount",
+        "brand_flavor_code",
+        "package_category_code",
+        "package_name",
+        "trade_channel_key"
+      ],
+      "description": "Checks that sale_date, sales_amount, brand_flavor_code, package_category_code, package_name, trade_channel_key are populated."
+    },
+    "silver_channel_exists": {
+      "type": "references",
+      "references": [
+        {
+          "table": "silver/channel_group",
+          "columns": [
+            "trade_channel_key"
+          ]
+        }
+      ],
+      "description": "Checks that each sale references an existing Silver channel."
+    }
+  },
+  "validation_description": "Approved product keys and attributes used to check incoming Silver sales."
+}

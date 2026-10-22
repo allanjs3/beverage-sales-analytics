@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="860" viewBox="0 0 1920 860" role="img" aria-labelledby="title desc">
+<title id="title">Beverage Sales Job workflow</title>
+<desc id="desc">Thirteen tasks: Bronze, Silver, dimensions, fact, aggregates and quality. Main dependencies are shown; quality receives all selected load results.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M1,1 L7,4 L1,7 Z" fill="#61778A"/></marker></defs>
+<rect width="1920" height="860" fill="#F5F7FA"/>
+<style>text{font-family:Segoe UI,Arial,sans-serif}.code{font-family:Consolas,monospace}</style>
+<text x="32" y="58" font-size="32" font-weight="700" fill="#172D40">Processing workflow</text>
+<text x="32" y="94" font-size="19" fill="#586B7B">beverage_sales  ·  13 tasks  ·  Incremental processing</text>
+<rect x="30" y="140" width="250" height="620" rx="16" fill="#F8EDE3"/>
+<rect x="50" y="169" width="6" height="28" rx="3" fill="#9A5B30"/>
+<text x="69" y="192" font-size="27" font-weight="700" fill="#9A5B30">Bronze</text>
+<text x="52" y="229" font-size="16" fill="#586B7B">File ingestion</text>
+<rect x="320" y="140" width="250" height="620" rx="16" fill="#EAF0F7"/>
+<rect x="340" y="169" width="6" height="28" rx="3" fill="#4B6484"/>
+<text x="359" y="192" font-size="27" font-weight="700" fill="#4B6484">Silver</text>
+<text x="342" y="229" font-size="16" fill="#586B7B">Data preparation</text>
+<rect x="610" y="140" width="960" height="620" rx="16" fill="#FCF4DE"/>
+<rect x="630" y="169" width="6" height="28" rx="3" fill="#8B641A"/>
+<text x="649" y="192" font-size="27" font-weight="700" fill="#8B641A">Gold</text>
+<text x="642" y="229" font-size="18" font-weight="600" fill="#795D29">Dimensions</text>
+<text x="992" y="229" font-size="18" font-weight="600" fill="#795D29">Fact</text>
+<text x="1302" y="229" font-size="18" font-weight="600" fill="#795D29">Aggregates</text>
+<rect x="1600" y="140" width="290" height="620" rx="16" fill="#E8F4EE"/>
+<text x="1622" y="192" font-size="27" font-weight="700" fill="#23734A">Quality</text>
+<text x="1622" y="229" font-size="16" fill="#586B7B">After selected loads</text>
+<polyline data-from="bronze_channel_group" data-to="silver_channel_group" points="258,300 342,300" fill="none" stroke="#61778A" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline data-from="bronze_sales" data-to="silver_sales" points="258,560 342,560" fill="none" stroke="#61778A" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline data-from="silver_channel_group" data-to="silver_sales" points="445,340 445,520" fill="none" stroke="#61778A" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline data-from="silver_channel_group" data-to="gold_dim_channel" points="548,300 642,300" fill="none" stroke="#61778A" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline data-from="silver_sales" data-to="gold_dim_calendar" points="548,560 596,560 596,440 642,440" fill="none" stroke="#61778A" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline data-from="silver_sales" data-to="gold_dim_product" points="548,560 642,560" fill="none" stroke="#61778A" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline data-from="silver_sales" data-to="gold_dim_region" points="548,560 596,560 596,680 642,680" fill="none" stroke="#61778A" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline data-from="gold_dim_channel" data-to="gold_fact_sales" points="882,300 940,300 940,480 992,480" fill="none" stroke="#61778A" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline data-from="gold_dim_calendar" data-to="gold_fact_sales" points="882,440 940,440 940,480 992,480" fill="none" stroke="#61778A" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline data-from="gold_dim_product" data-to="gold_fact_sales" points="882,560 940,560 940,480 992,480" fill="none" stroke="#61778A" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline data-from="gold_dim_region" data-to="gold_fact_sales" points="882,680 940,680 940,480 992,480" fill="none" stroke="#61778A" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline data-from="gold_fact_sales" data-to="gold_agg_sales_brand_month" points="1212,480 1256,480 1256,310 1302,310" fill="none" stroke="#61778A" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline data-from="gold_fact_sales" data-to="gold_agg_sales_region_brand" points="1212,480 1302,480" fill="none" stroke="#61778A" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline data-from="gold_fact_sales" data-to="gold_agg_sales_region_trade_group" points="1212,480 1256,480 1256,650 1302,650" fill="none" stroke="#61778A" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<circle cx="596" cy="560" r="4" fill="#61778A"/>
+<circle cx="940" cy="480" r="4" fill="#61778A"/>
+<circle cx="1256" cy="480" r="4" fill="#61778A"/>
+<g id="bronze_channel_group"><rect x="52" y="264" width="206" height="80" rx="9" fill="#DCE3EA" opacity="0.55"/><rect x="52" y="260" width="206" height="80" rx="9" fill="#FFFFFF" stroke="#A56B40" stroke-opacity="0.55"/><rect x="68" y="275" width="24" height="4" rx="2" fill="#A56B40"/>
+<text x="68" y="303" class="code" font-size="18" font-weight="700" fill="#213547">channel_group</text>
+<text x="68" y="325" font-size="14" fill="#586B7B">CSV → Delta</text>
+</g>
+<g id="bronze_sales"><rect x="52" y="524" width="206" height="80" rx="9" fill="#DCE3EA" opacity="0.55"/><rect x="52" y="520" width="206" height="80" rx="9" fill="#FFFFFF" stroke="#A56B40" stroke-opacity="0.55"/><rect x="68" y="535" width="24" height="4" rx="2" fill="#A56B40"/>
+<text x="68" y="563" class="code" font-size="18" font-weight="700" fill="#213547">sales</text>
+<text x="68" y="585" font-size="14" fill="#586B7B">CSV → Delta</text>
+</g>
+<g id="silver_channel_group"><rect x="342" y="264" width="206" height="80" rx="9" fill="#DCE3EA" opacity="0.55"/><rect x="342" y="260" width="206" height="80" rx="9" fill="#FFFFFF" stroke="#607C9B" stroke-opacity="0.55"/><rect x="358" y="275" width="24" height="4" rx="2" fill="#607C9B"/>
+<text x="358" y="303" class="code" font-size="18" font-weight="700" fill="#213547">channel_group</text>
+<text x="358" y="325" font-size="14" fill="#586B7B">Channel normalization</text>
+</g>
+<g id="silver_sales"><rect x="342" y="524" width="206" height="80" rx="9" fill="#DCE3EA" opacity="0.55"/><rect x="342" y="520" width="206" height="80" rx="9" fill="#FFFFFF" stroke="#607C9B" stroke-opacity="0.55"/><rect x="358" y="535" width="24" height="4" rx="2" fill="#607C9B"/>
+<text x="358" y="563" class="code" font-size="18" font-weight="700" fill="#213547">sales</text>
+<text x="358" y="585" font-size="14" fill="#586B7B">Types and validation</text>
+</g>
+<g id="gold_dim_channel"><rect x="642" y="264" width="240" height="80" rx="9" fill="#DCE3EA" opacity="0.55"/><rect x="642" y="260" width="240" height="80" rx="9" fill="#FFFFFF" stroke="#C09A3D" stroke-opacity="0.55"/><rect x="658" y="275" width="24" height="4" rx="2" fill="#C09A3D"/>
+<text x="658" y="303" class="code" font-size="18" font-weight="700" fill="#213547">dim_channel</text>
+<text x="658" y="325" font-size="14" fill="#586B7B">Channel classification</text>
+</g>
+<g id="gold_dim_calendar"><rect x="642" y="404" width="240" height="80" rx="9" fill="#DCE3EA" opacity="0.55"/><rect x="642" y="400" width="240" height="80" rx="9" fill="#FFFFFF" stroke="#C09A3D" stroke-opacity="0.55"/><rect x="658" y="415" width="24" height="4" rx="2" fill="#C09A3D"/>
+<text x="658" y="443" class="code" font-size="18" font-weight="700" fill="#213547">dim_calendar</text>
+<text x="658" y="465" font-size="14" fill="#586B7B">Calendar</text>
+</g>
+<g id="gold_dim_product"><rect x="642" y="524" width="240" height="80" rx="9" fill="#DCE3EA" opacity="0.55"/><rect x="642" y="520" width="240" height="80" rx="9" fill="#FFFFFF" stroke="#C09A3D" stroke-opacity="0.55"/><rect x="658" y="535" width="24" height="4" rx="2" fill="#C09A3D"/>
+<text x="658" y="563" class="code" font-size="18" font-weight="700" fill="#213547">dim_product</text>
+<text x="658" y="585" font-size="14" fill="#586B7B">Product and packaging</text>
+</g>
+<g id="gold_dim_region"><rect x="642" y="644" width="240" height="80" rx="9" fill="#DCE3EA" opacity="0.55"/><rect x="642" y="640" width="240" height="80" rx="9" fill="#FFFFFF" stroke="#C09A3D" stroke-opacity="0.55"/><rect x="658" y="655" width="24" height="4" rx="2" fill="#C09A3D"/>
+<text x="658" y="683" class="code" font-size="18" font-weight="700" fill="#213547">dim_region</text>
+<text x="658" y="705" font-size="14" fill="#586B7B">Sales region</text>
+</g>
+<g id="gold_fact_sales"><rect x="992" y="444" width="220" height="80" rx="9" fill="#DCE3EA" opacity="0.55"/><rect x="992" y="440" width="220" height="80" rx="9" fill="#FFF0C9" stroke="#9B701D" stroke-opacity="0.55"/><rect x="1008" y="455" width="24" height="4" rx="2" fill="#9B701D"/>
+<text x="1008" y="483" class="code" font-size="18" font-weight="700" fill="#213547">fact_sales</text>
+<text x="1008" y="505" font-size="14" fill="#586B7B">Sales occurrences</text>
+</g>
+<g id="gold_agg_sales_brand_month"><rect x="1302" y="264" width="236" height="100" rx="9" fill="#DCE3EA" opacity="0.55"/><rect x="1302" y="260" width="236" height="100" rx="9" fill="#FFFFFF" stroke="#C09A3D" stroke-opacity="0.55"/><rect x="1318" y="275" width="24" height="4" rx="2" fill="#C09A3D"/>
+<text x="1318" y="300" font-size="16" font-weight="700" fill="#213547">Brand × month</text>
+<text x="1318" y="325" class="code" font-size="15" fill="#586B7B">agg_sales_</text>
+<text x="1318" y="345" class="code" font-size="15" fill="#586B7B">brand_month</text>
+</g>
+<g id="gold_agg_sales_region_brand"><rect x="1302" y="434" width="236" height="100" rx="9" fill="#DCE3EA" opacity="0.55"/><rect x="1302" y="430" width="236" height="100" rx="9" fill="#FFFFFF" stroke="#C09A3D" stroke-opacity="0.55"/><rect x="1318" y="445" width="24" height="4" rx="2" fill="#C09A3D"/>
+<text x="1318" y="470" font-size="16" font-weight="700" fill="#213547">Region × brand</text>
+<text x="1318" y="495" class="code" font-size="15" fill="#586B7B">agg_sales_</text>
+<text x="1318" y="515" class="code" font-size="15" fill="#586B7B">region_brand</text>
+</g>
+<g id="gold_agg_sales_region_trade_group"><rect x="1302" y="604" width="236" height="100" rx="9" fill="#DCE3EA" opacity="0.55"/><rect x="1302" y="600" width="236" height="100" rx="9" fill="#FFFFFF" stroke="#C09A3D" stroke-opacity="0.55"/><rect x="1318" y="615" width="24" height="4" rx="2" fill="#C09A3D"/>
+<text x="1318" y="640" font-size="16" font-weight="700" fill="#213547">Region × trade group</text>
+<text x="1318" y="665" class="code" font-size="15" fill="#586B7B">agg_sales_</text>
+<text x="1318" y="685" class="code" font-size="15" fill="#586B7B">region_trade_group</text>
+</g>
+<polyline data-from="gold_agg_sales_brand_month" data-to="data_quality" points="1538,310 1590,310 1590,480 1622,480" fill="none" stroke="#61778A" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline data-from="gold_agg_sales_region_brand" data-to="data_quality" points="1538,480 1590,480 1590,480 1622,480" fill="none" stroke="#61778A" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<polyline data-from="gold_agg_sales_region_trade_group" data-to="data_quality" points="1538,650 1590,650 1590,480 1622,480" fill="none" stroke="#61778A" stroke-width="2.6" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<g id="data_quality"><rect x="1622" y="410" width="246" height="140" rx="9" fill="white" stroke="#23734A"/>
+<text x="1638" y="442" font-size="18" font-weight="700" fill="#23734A">8 essential rules</text>
+<text x="1638" y="470" class="code" font-size="16" fill="#213547">data_quality</text>
+<text x="1638" y="500" font-size="15" fill="#586B7B">Data written: validate all</text>
+<text x="1638" y="526" font-size="15" fill="#586B7B">No writes: skip</text></g>
+<text x="32" y="802" font-size="18" fill="#213547">Arrows indicate completion dependencies. Independent tasks can run in parallel.</text>
+<text x="32" y="833" font-size="17" fill="#586B7B">Quality waits for loads and records results only when checks run.</text>
+</svg>
